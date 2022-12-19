@@ -21,9 +21,12 @@ namespace Shapes
             _radius = r;
         }
 
-        // Площадь круга равна: число Пи умноженное на радиус в квадрате
+        /// <summary>
+        /// Represents the area of a circle.
+        /// </summary>
         public override double Area
         {
+            // The area of a circle is Pi times radius squared
             get => Math.PI * Math.Pow(_radius, 2);
         }
     }

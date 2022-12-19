@@ -17,12 +17,12 @@ namespace Shapes
         double _sideA, _sideB, _sideC;
         public Triangle(double a, double b, double c)
         {
-            // Стороны треугольника не могут быть меньше нуля
+            // Sides of a triangle cannot be less than zero
             if (a < 0 || b < 0 || c < 0)
                 throw new ArgumentOutOfRangeException
-                        ("Sides of triangle cannot be negative");
+                        ("Sides of a triangle cannot be negative");
 
-            // Две стороны треугольника в сумме должны быть больше третьей
+            // Two sides of a triangle together must be greater than the third
             if ((a + b) < c || (a + c) < b || (b + c) < a)
                 throw new ArgumentException
                     ("This is not a correct triangle");
@@ -32,22 +32,31 @@ namespace Shapes
 
         public bool IsRightAngled => CheckIfRightAngled(_sideA, _sideB, _sideC);
 
+        /// <summary>
+        /// This method checks if a triangle is right-angled or not.
+        /// </summary>
+        /// <param name="a">First side</param>
+        /// <param name="b">Second side</param>
+        /// <param name="c">Third side</param>
         bool CheckIfRightAngled(double a, double b, double c)
         {
-            // Находим гипотенузу
+            // Figuring out the hypotenuse
             double biggest = (new double[] { a, b, c }).Max();
 
             /*
-                В прямоугольном треугольнике квадрат гипотенузы равен
-                сумме квадратов катетов. Так как мы заранее не знаем,
-                какая из сторон наибольшая, с правой стороны считаем
-                все три стороны а с левой берём квадрат гипотенузы
-                в двойном количестве
+                In a right-angled triangle the square of the hypotenuse
+                is equal to the sum of the squares of the other two sides.
+                Since we don't know yet which side is hypotenuse we can count
+                all three sides on the right and take an extra square of the
+                hypotenuse on the left
             */
             return (Math.Pow(biggest, 2) * 2) ==
                 Math.Pow(a, 2) + Math.Pow(b, 2) + Math.Pow(c, 2);
         }
 
+        /// <summary>
+        /// Represents the area of a triangle.
+        /// </summary>
         public override double Area
         {
             get
@@ -55,7 +64,7 @@ namespace Shapes
                 // sp - semiperimeter
                 double sp = (_sideA + _sideB + _sideC) / 2;
                 
-                // формула Герона
+                // Heron's formula
                 return Math.Sqrt
                     (sp * (sp - _sideA) * (sp - _sideB) * (sp - _sideC));
             }
